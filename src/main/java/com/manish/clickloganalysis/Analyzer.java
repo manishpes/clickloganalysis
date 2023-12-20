@@ -42,27 +42,6 @@ public class Analyzer {
 		System.out.println("\n 1.b Valid google aid "+ table.textColumn("google_aid").filter(isValid).size());
 		System.out.println("\n 1.b Valid ios aid "+table.stringColumn("ios_ifa").filter(isValid).size());
 		
-		/* 
-		IntColumn affliateId = (IntColumn) table.column("affiliate_id"); 
-		StringColumn ios_ifa = table.stringColumn("ios_ifa").removeMissing().unique().filter(isValid);
-		TextColumn google_aid = (TextColumn)table.textColumn("google_aid").removeMissing().unique().filter(isValid);
-		Map<String , Integer> iosClicks = new HashMap<String, Integer>();
-		Map<String , Integer> googleClicks = new HashMap<String, Integer>();
-		
-		for(String ios : ios_ifa){
-			Table filtered = table.select("affiliate_id","ios_ifa").where(table.stringColumn("ios_ifa").isEqualTo(ios));
-			iosClicks.put(ios, ((IntColumn)filtered.column("affiliate_id")).get(0));
-		}
-		for(String google : google_aid){
-			Table filtered = table.select("affiliate_id","google_aid").where(table.textColumn("google_aid").isEqualTo(google));
-			googleClicks.put(google, ((IntColumn)filtered.column("affiliate_id")).get(0));
-		}
-		
-		
-		System.out.println(" Size of Ioclicks "+ iosClicks.size());
-		System.out.println("Size of Android  "+ googleClicks.size());
-		*/
-		
 		Table result = table.countBy(table.intColumn("affiliate_id")).sortAscendingOn("Category");		
 		Plot.show(Histogram.create("2.2 no of clicks v/s affliateid ", table, "affiliate_id"));
 		
